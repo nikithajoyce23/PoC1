@@ -13,14 +13,14 @@ pipeline {
         }
         stage("Create artifacts or make changes") {
             steps {
-                sh "touch testfile"
-                sh "git add testfile"
-                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+                sh "touch C://Users//nijoyce//OneDrive - Cisco//Desktop//SourceCode"
+                sh "git add C://Users//nijoyce//OneDrive - Cisco//Desktop//SourceCode"
+                sh "git commit -m 'Add C://Users//nijoyce//OneDrive - Cisco//Desktop//SourceCode from Jenkins Pipeline'"
             }
         }
         stage("Push to Git Repository") {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'ssbostan-github-token', gitToolName: 'Default')]) {
+                withCredentials([gitUsernamePassword(credentialsId: 'Nikitha Joyce', gitToolName: 'Default')]) {
                     sh "git push -u origin main"
                 }
             }
