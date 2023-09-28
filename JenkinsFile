@@ -1,1 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Fetch and Push to GitHub') {
+            steps {
+                script {
+                    // Define the paths to your local Git repository and the remote GitHub repository.
+                    def localRepoPath = 'C:\\Users\\nijoyce\\OneDrive - Cisco\\Desktop\\SourceCode'
+                    def githubRepoURL = 'https://github.com/nikithajoyce23/PoC1.git'
+
+                    // Check if changes exist in the local Git repository.
+                    def hasChanges = false
+                    dir(localRepoPath) {
+                        hasChanges = bat(script: 'git diff --quiet || echo CHANGES', returnStatus: true) == 0
+                    }
+
+                    if (hasChanges) {
+                        echo 'Changes detected'
+
+                        // Fetch changes from the local repository and push to GitHub.
+                        dir(githubRepoURL) {
+                            bat 'git add .'
+                            bat 'git commit -m "Auto-commit: Changes detected"'
+                            bat 'git push origin master'
+                        }
+                    } else {
+                        echo 'No changes'
+                    }
+                }
+            }
+        }
+    }
+}
 
